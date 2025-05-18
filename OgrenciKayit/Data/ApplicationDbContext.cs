@@ -9,8 +9,8 @@ namespace OgrenciKayit.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext() : base("DefaultConnection") { }
+        public ApplicationDbContext() : base("OgrenciKayitDb") { }
         
-        public DbSet<Ogrenci> Ogrenciler { get; set; }
+        public DbSet<Ogrenci> Ogrencis { get; set; }
     }
 }

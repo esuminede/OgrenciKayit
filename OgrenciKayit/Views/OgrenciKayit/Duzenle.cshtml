@@ -12,12 +12,6 @@
     @Html.HiddenFor(model => model.OgrenciNo)
 
     <div class="form-group mb-3">
-        @Html.LabelFor(model => model.OgrenciNo)
-        @Html.TextBoxFor(model => model.OgrenciNo, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.OgrenciNo)
-    </div>
-
-    <div class="form-group mb-3">
         @Html.LabelFor(model => model.Sinif)
         @Html.TextBoxFor(model => model.Sinif, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Sinif)
@@ -35,6 +29,11 @@
         @Html.ValidationMessageFor(model => model.Soyisim)
     </div>
 
+    <div class="form-group mb-3">
+        @Html.LabelFor(model => model.Hakkinda)
+        @Html.TextAreaFor(model => model.Hakkinda, new { @class = "form-control", rows=4 })
+        @Html.ValidationMessageFor(model => model.Hakkinda)
+    </div>
     <button type="submit" class="btn btn-primary">Güncelle</button>
     @Html.ActionLink("Geri Dön", "Index", null, new { @class = "btn btn-secondary ms-2" })
 }

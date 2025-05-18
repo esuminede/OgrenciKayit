@@ -22,9 +22,11 @@
     <dd class="col-sm-10">@Model.Soyisim</dd>
 </dl>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Sil", "OgrenciKayit", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <input type="submit" value="Sil" class="btn btn-danger" />
-    @Html.ActionLink("İptal", "Index", null, new { @class = "btn btn-secondary ms-2" })
+    @Html.HiddenFor(m => m.OgrenciNo)
+    <p>@Model.Isim @Model.Soyisim kaydını silmek istediğinize emin misiniz?</p>
+    <button type="submit" class="btn btn-danger">Sil</button>
+    @Html.ActionLink("Vazgeç", "Index", null, new { @class = "btn btn-secondary" })
 }

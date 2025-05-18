@@ -13,7 +13,7 @@ namespace OgrenciKayit.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202505181227576_InitialCreate"; }
+            get { return "202505181352577_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

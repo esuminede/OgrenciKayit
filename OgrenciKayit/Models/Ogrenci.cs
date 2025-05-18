@@ -22,5 +22,7 @@ namespace OgrenciKayit.Models
 
         [Required]
         public string Soyisim { get; set; }
+
+        public string Hakkinda { get; set; }
     }
 }

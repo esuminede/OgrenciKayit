@@ -18,7 +18,7 @@ namespace OgrenciKayit.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index(string ara)
         {
-            var ogrenciler = db.Ogrenciler.AsQueryable();
+            var ogrenciler = db.Ogrencis.AsQueryable();
             if (!string.IsNullOrEmpty(ara))
             { 
                 ogrenciler = ogrenciler.Where(s => s.Isim.Contains(ara) || s.Soyisim.Contains(ara) || s.Sinif.Contains(ara));
@@ -41,7 +41,7 @@ namespace OgrenciKayit.Controllers
         {
             if(ModelState.IsValid)
             {
-                db.Ogrenciler.Add(ogrenci);
+                db.Ogrencis.Add(ogrenci);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -50,7 +50,7 @@ namespace OgrenciKayit.Controllers
         [HttpGet]
         public ActionResult Duzenle(int ogrenci_no)
         {
-            var ogrenci = db.Ogrenciler.Find(ogrenci_no);
+            var ogrenci = db.Ogrencis.Find(ogrenci_no);
             if (ogrenci == null)
                 return HttpNotFound();
             return View(ogrenci);
@@ -62,7 +62,7 @@ namespace OgrenciKayit.Controllers
         {
             if (ModelState.IsValid) 
             {
-                var ogrenci_var = db.Ogrenciler.Find(ogrenci.OgrenciNo); // var olan öğrenci
+                var ogrenci_var = db.Ogrencis.Find(ogrenci.OgrenciNo); // var olan öğrenci
                 if (ogrenci_var == null)
                 {
                     return HttpNotFound();
@@ -71,6 +71,7 @@ namespace OgrenciKayit.Controllers
                 ogrenci_var.Sinif = ogrenci.Sinif;
                 ogrenci_var.Isim = ogrenci.Isim;
                 ogrenci_var.Soyisim = ogrenci.Soyisim;
+                ogrenci_var.Hakkinda = ogrenci.Hakkinda;
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,34 +79,31 @@ namespace OgrenciKayit.Controllers
             return View(ogrenci);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public ActionResult Sil(int ogrenci_no)
         {
-            var ogrenci = db.Ogrenciler.Find(ogrenci_no);
+            var ogrenci = db.Ogrencis.Find(ogrenci_no);
             if (ogrenci == null)
             {
                 return HttpNotFound();
             }
-            
             return View(ogrenci);
         }
 
         [HttpPost, ActionName("Sil")]
         [ValidateAntiForgeryToken]
-        public ActionResult SilOnay(int ogrenci_no)
+        public ActionResult SilOnay(int OgrenciNo)
         {
-            var ogrenci = db.Ogrenciler.Find(ogrenci_no);
-           db.Ogrenciler.Remove(ogrenci);
+            var ogrenci = db.Ogrencis.Find(OgrenciNo);
+            db.Ogrencis.Remove(ogrenci);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public ActionResult Detay(int ogrenci_no)
         {
-            var ogrenci = db.Ogrenciler.Find(ogrenci_no);
+            var ogrenci = db.Ogrencis.Find(ogrenci_no);
             if(ogrenci == null) 
                 return HttpNotFound();
 

@@ -29,6 +29,11 @@
         @Html.TextBoxFor(m => m.Soyisim, new { @class = "form-control" })
     </div>
 
+    <div class="coll-md-6">
+        <label class="form-label">Hakkında</label>
+        @Html.TextAreaFor(m => m.Hakkinda, new { @class = "form-control" })
+    </div>
+
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Kaydet</button>
     </div>
