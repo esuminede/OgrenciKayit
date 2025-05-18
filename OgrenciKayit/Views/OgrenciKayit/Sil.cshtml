@@ -1,0 +1,30 @@
+﻿@model OgrenciKayit.Models.Ogrenci
+
+@{
+    ViewBag.Title = "Öğrenci Kaydı Sil";
+}
+
+<h2>Sil</h2>
+
+<div class="alert alert-warning">
+    <strong>Dikkat!</strong>Bu öğrencinin kaydını silmek üzeresiniz:
+</div>
+
+<dl class="row">
+
+    <dt class="col-sm-2">Numara</dt>
+    <dd class="col-sm-10">@Model.OgrenciNo</dd>
+
+    <dt class="col-sm-2">İsim</dt>
+    <dd class="col-sm-10">@Model.Isim</dd>
+
+    <dt class="col-sm-2">Soyisim</dt>
+    <dd class="col-sm-10">@Model.Soyisim</dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Sil" class="btn btn-danger" />
+    @Html.ActionLink("İptal", "Index", null, new { @class = "btn btn-secondary ms-2" })
+}

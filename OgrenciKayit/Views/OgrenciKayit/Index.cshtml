@@ -1,0 +1,62 @@
+﻿@model IEnumerable<OgrenciKayit.Models.Ogrenci>
+
+@{
+    ViewBag.Title = "Öğrenci Listesi";
+}
+
+<div class="container mb-4">
+    @using (Html.BeginForm("Index", "OgrenciKayit", FormMethod.Get))
+    {
+        <div class="input-group">
+            @Html.TextBox("ara", ViewBag.Search as string, new { @class = "form-control", placeholder = "Öğrenci adı veya numarası ara..." })
+            <button type="submit" class="btn btn-outline-primary">Ara</button>
+        </div>
+    }
+</div>
+<div class="container">
+    <div class="row">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Öğrenci No</th>
+                    <th>Sınıf</th>
+                    <th>İsim</th>
+                    <th>Soyisim</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">Hiç Kayıt Bulunamadı.</td>
+                    </tr>
+                }
+                else
+                {
+                    int i = 1;
+                    foreach (var ogrenci in Model)
+                    {
+                        <tr>
+
+                            <td>@ogrenci.OgrenciNo</td>
+                            <td>@ogrenci.Sinif</td>
+                            <td>@ogrenci.Isim</td>
+                            <td>@ogrenci.Soyisim</td>
+                            <td>
+                                <a href="@Url.Action("Detay", "OgrenciKayit", new { ogrenci_no = ogrenci.OgrenciNo })" class="btn btn-sm btn-primary me-2">Detay</a>
+                                <a href="@Url.Action("Duzenle", "OgrenciKayit", new { ogrenci_no = ogrenci.OgrenciNo })" class="btn btn-sm btn-warning me-2">Düzenle</a>
+                                <a href="@Url.Action("Sil", "OgrenciKayit", new { ogrenci_no = ogrenci.OgrenciNo })" class="btn btn-sm btn-danger">Sil</a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mb-3">
+        <a href="@Url.Action("Ekle", "OgrenciKayit")" class="btn btn-success">Yeni Öğrenci Ekle</a>
+    </div>
+
+</div>
